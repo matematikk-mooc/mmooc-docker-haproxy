@@ -1,13 +1,6 @@
-FROM ubuntu:12.04
+FROM haproxy:1.5
 
-RUN apt-get -y update --fix-missing
-RUN apt-get install -y software-properties-common python-software-properties
-RUN add-apt-repository ppa:vbernat/haproxy-1.5 && apt-get -y update && apt-get install haproxy
 
-EXPOSE 80 443
-
-ADD haproxy.sh /root/haproxy.sh
-ADD haproxy.cfg /root/haproxy.cfg
-
-CMD ["/root/haproxy.sh"]
+COPY haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg
+COPY cloudapp.net.pem /etc/cert/cloudapp.net.pem
 
